@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="959.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proj.open_db_controller">
+   <children>
+      <TableView fx:id="table1" layoutX="26.0" layoutY="22.0" prefHeight="348.0" prefWidth="713.0">
+        <columns>
+          <TableColumn fx:id="brand_column" prefWidth="203.0" text="Марка телефона" />
+          <TableColumn fx:id="vendor_code_column" prefWidth="166.0" text="Артикул" />
+            <TableColumn fx:id="price_column" prefWidth="158.0" text="Цена" />
+           
+        </columns>
+      </TableView>
+      <Button fx:id="find_button" layoutX="494.0" layoutY="394.0" mnemonicParsing="false" text="Поиск по таблице" />
+      <Button fx:id="delete_button" layoutX="311.0" layoutY="394.0" mnemonicParsing="false" text="Удалить запись" />
+      <Button fx:id="save_button" layoutX="26.0" layoutY="455.0" mnemonicParsing="false" text="Сохранить таблицу" />
+      <Button fx:id="add_button" layoutX="26.0" layoutY="394.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="252.0" text="Добавить новую запись" />
+      <Button fx:id="edit_button" layoutX="691.0" layoutY="394.0" mnemonicParsing="false" text="Редактировать" />
+   </children>
+</AnchorPane>

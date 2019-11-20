@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proj.first_window_controller">
+   <children>
+      <Button fx:id="create_bd" layoutX="37.0" layoutY="209.0" mnemonicParsing="false" text="Создать базу данных" />
+      <Button fx:id="open_bd" layoutX="364.0" layoutY="209.0" mnemonicParsing="false" text="Открыть базу данных" />
+      <Label layoutX="135.0" layoutY="62.0" prefHeight="100.0" prefWidth="342.0" text="Добро пожаловать на главную страницу базы данных! Выберите действие:" wrapText="true" />
+   </children>
+</AnchorPane>
