@@ -10,14 +10,17 @@ public class main extends Application{
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception{
-		Parent root = FXMLLoader.load(getClass().getResource("main_window.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("/proj/main_window.fxml"));
 	    primaryStage.setTitle("Data base");
 		primaryStage.setScene(new Scene(root,700,400));
 		primaryStage.show();
 		System.out.println('g');
 	}
 
-	public static void main(String[] args) {launch(args);}
+	public static void main(String[] args) {
+		
+		Application.launch(args);
 
+}
 }
 

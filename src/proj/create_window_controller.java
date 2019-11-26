@@ -67,11 +67,12 @@ public class create_window_controller {
 				
 				e.printStackTrace();
 			} 
-			phone.set_brand(brand.getText());
+			
+			phone.setBrand(brand.getText());
 			 int code = Integer.parseInt(vendor_code.getText());
-			phone.set_vendor_code(code);
+			phone.setVendor_code(code);
 			 int prices = Integer.parseInt(price.getText());
-			phone.set_price(prices);
+			phone.setPrice(prices);
 			
 			try {BufferedWriter bufferedWriter = new BufferedWriter(fileWriter); // соединяем FileWriter с BufferedWriter
 		
@@ -89,12 +90,13 @@ public class create_window_controller {
     @FXML
     String stringing(Phone phone) {
 	 StringBuilder sb = new StringBuilder();
-	
-    sb.append(phone.brand);
+	//sb.append(phone.getId());
+	//sb.append("|");
+    sb.append(phone.getBrand());
     sb.append("|");
-    sb.append(phone.vendor_code);
+    sb.append(phone.getVendor_code());
     sb.append("|");
-    sb.append(phone.price);
+    sb.append(phone.getPrice());
     sb.append("|");
    
   

@@ -1,14 +1,71 @@
 package proj;
 
+
+
+public class Phone {
+
+   // private int id;
+    private String brand;
+    private int vendor_code;
+    private int price;
+
+    public Phone(/*int id*/String brand, int vendor_code, int price) {
+       // this.id = id;
+        this.brand = brand;
+        this.vendor_code = vendor_code;
+        this.price = price;
+    }
+
+    public Phone() {
+    }
+    /*
+    public Phone(Integer id) {
+        this.id = id;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }*/
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public int getVendor_code() {
+        return vendor_code;
+    }
+
+    public void setVendor_code(int vendor_code) {
+        this.vendor_code = vendor_code;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+}
+/*
 public class Phone {
 	    String brand; 
-	    Integer vendor_code;
-	    Integer price;
+	    int vendor_code;
+	    int price;
 	 
-	    boolean sensor;
+	   // boolean sensor;
 	  
 	    
-	    public Phone() {}
+	   
 
 	    public Phone(String brand, Integer vendor_code, Integer price) {
 	        this.brand = brand;
@@ -17,10 +74,10 @@ public class Phone {
 	        
 	       // this.sensor = sensor;
 	    }
-
-	    public Phone(String brand) {
+public Phone() {}
+/* 	    public Phone(String brand) {
 	        this.brand = brand;
-	    }
+	    } 
 
 	    public String get_brand() {
 	        return brand;
@@ -30,7 +87,7 @@ public class Phone {
 	        this.brand = brand;
 	    }
 
-	    public Integer get_vendor_code() {
+	    public int get_vendor_code() {
 	        return vendor_code;
 	    }
 
@@ -38,7 +95,7 @@ public class Phone {
 	        this.vendor_code = vendor_code;
 	    }
 
-	    public Integer get_price() {
+	    public int get_price() {
 	        return price;
 	    }
 
@@ -46,7 +103,7 @@ public class Phone {
 	        this.price = price;
 	    }
 
-	   
+	   */
 
 //	    public boolean get_sensor() {
 	//        return sensor;
@@ -55,4 +112,4 @@ public class Phone {
 //	    public void set_sensor(boolean sensor) {
 	//        this.sensor = sensor;
 	  //  }
-}
+//}
