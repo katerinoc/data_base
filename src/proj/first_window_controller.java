@@ -46,14 +46,13 @@ public class first_window_controller {
         }catch(Exception e) {
             e.printStackTrace();
         }
-        //Parent root1 = (Parent) root.load();
+       
         Stage stage = new Stage();
         stage.setScene(new Scene(root));  
         stage.show();}
 
 
-        	//AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getClassLoader().getResource("src/proj/open_bd.fxml"));;}
-        catch(Exception e) {
+         catch(Exception e) {
         	e.printStackTrace();
         }
         });
