@@ -3,7 +3,11 @@ package proj;
 
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -15,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class first_window_controller {
+	
 
     @FXML
     private ResourceBundle resources;
@@ -42,6 +47,7 @@ public class first_window_controller {
         });
         open_bd.setOnAction(event ->{try{
                 	Parent root = FXMLLoader.load(getClass().getResource("/proj/main.fxml"));
+                	
         try {
         }catch(Exception e) {
             e.printStackTrace();
@@ -70,4 +76,5 @@ public class first_window_controller {
             stage.setScene(new Scene(root1));  
             stage.show();
         }
+       
 }

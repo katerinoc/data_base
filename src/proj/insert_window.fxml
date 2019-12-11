@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="256.0" prefWidth="513.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proj.insert_window_controller_first">
+   <children>
+      <Button fx:id="search_brand" layoutX="45.0" layoutY="78.0" mnemonicParsing="false" text="Поиск по модели" />
+      <Button fx:id="search_vendor_code" layoutX="284.0" layoutY="78.0" mnemonicParsing="false" text="Поиск по артикулу" />
+      <Button fx:id="search_price" layoutX="177.0" layoutY="147.0" mnemonicParsing="false" text="Поиск по цене" />
+   </children>
+</AnchorPane>

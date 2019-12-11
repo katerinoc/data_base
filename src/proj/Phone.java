@@ -40,19 +40,19 @@ public class Phone {
         this.brand = brand;
     }
 
-    public int getVendor_code() {
+    public Integer getVendor_code() {
         return vendor_code;
     }
 
-    public void setVendor_code(int vendor_code) {
+    public void setVendor_code(Integer vendor_code) {
         this.vendor_code = vendor_code;
     }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 }

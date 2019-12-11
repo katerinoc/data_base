@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="293.0" prefWidth="411.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proj.insert_window_controller_second">
+   <children>
+      <TextField fx:id="search_field_brand" layoutX="83.0" layoutY="59.0" />
+      <Button fx:id="search" layoutX="322.0" layoutY="231.0" mnemonicParsing="false" text="Найти" />
+      <TextField fx:id="search_field_vendor_code" layoutX="83.0" layoutY="108.0" />
+      <TextField fx:id="search_field_price" layoutX="83.0" layoutY="155.0" />
+   </children>
+</AnchorPane>
