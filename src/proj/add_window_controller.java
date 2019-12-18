@@ -84,8 +84,6 @@ public class add_window_controller {
     @FXML
     String stringing(Phone phone) {
 	 StringBuilder sb = new StringBuilder();
-	//sb.append(phone.getId());
-	//sb.append("|");
     sb.append(phone.getBrand());
     sb.append("|");
     sb.append(phone.getVendor_code());

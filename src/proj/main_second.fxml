@@ -22,6 +22,7 @@
         <Font name="Verdana" size="24.0" />
       </font>
     </Label>
-     
+     <Button fx:id="delete" layoutX="14.0" layoutY="403.0" mnemonicParsing="false" text="Удалить запись" />
+      
   </children>
 </AnchorPane>

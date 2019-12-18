@@ -4,6 +4,7 @@ package proj;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -32,6 +34,8 @@ public class first_window_controller {
 
     @FXML
     private Button create_bd;
+    @FXML
+    private Button recover_back_up;
     
     @FXML
     void initialize() {
@@ -62,8 +66,60 @@ public class first_window_controller {
         	e.printStackTrace();
         }
         });
+        recover_back_up.setOnAction(event->{try{
+        	recoverBackup();
+        	recover_back_up.getScene().getWindow().hide();}
+        catch(Exception e) {
+        	e.printStackTrace();
+        	
+        }
+        });
+    
       
     }
+    public void recoverBackup() throws FileNotFoundException {
+		 FileInputStream fileIn = null;
+		 FileOutputStream fileOut = null;
+
+		 try {
+		    fileIn = new FileInputStream("back_file.txt");
+		    fileOut = new FileOutputStream("file.txt");
+		    
+		    int a;
+		 // Копирование содержимого файла file.txt
+		    try {
+		 	while ((a = fileIn.read()) != -1) {
+		 	      fileOut.write(a); // Чтение содержимого файла file.txt и запись в файл copied_file.txt
+		 	     
+		 	}
+		 } catch (IOException e) {
+		 	// TODO Auto-generated catch block
+		 	e.printStackTrace();
+		 }
+		 }finally {
+		    if (fileIn != null) {
+		       try {
+		    	   Alert alert = new Alert(Alert.AlertType.INFORMATION);
+	                alert.setTitle("Success");
+	                alert.setHeaderText("Success");
+	                alert.setContentText("File recovered !");
+	                alert.showAndWait();  
+		 		fileIn.close();
+		 	} catch (IOException e) {
+		 		// TODO Auto-generated catch block
+		 		e.printStackTrace();
+		 	}
+		    }
+		    if (fileOut != null) {
+		       try {
+		 		fileOut.close();
+		 	} catch (IOException e) {
+		 		// TODO Auto-generated catch block
+		 		e.printStackTrace();
+		 	}
+		    }
+		 }
+	    }
         public void openNewWindow(String window) throws IOException {
         	
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(window));

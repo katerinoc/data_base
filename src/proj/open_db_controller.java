@@ -12,12 +12,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
 import proj.Phone;
+import sun.reflect.generics.tree.TypeTree;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +38,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import jdk.nashorn.internal.parser.Token;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -65,7 +70,9 @@ private static final String PATH = "file.txt";
     private Button search;
     @FXML
     private Button delete_phone;
-
+    @FXML
+    private Button back_up;
+    
 
     // инициализируем форму данными
     @FXML
@@ -158,6 +165,13 @@ add.getScene().getWindow().hide();}
         	e.printStackTrace();
         }
         });
+        back_up.setOnAction(event->{try
+        {backup();}
+        catch(Exception e) {
+        	e.printStackTrace();
+        }
+        });
+       
     
     }
     
@@ -174,13 +188,13 @@ add.getScene().getWindow().hide();}
 	                if (!currentLine.trim().isEmpty()) {
 	                
 	                    String[] field = currentLine.split("\\|");
-	                    //Integer id = Integer.parseInt(field[0]);
+	       
 	                    String brand = field[0];
 	                    Integer vendor_code=Integer.parseInt(field[1]);
 	                    Integer price=Integer.parseInt(field[2]);
 	                    
 	                   items.add(new Phone(brand, vendor_code, price));
-	                   System.out.println(items);
+	                   
 	                }
 	            } if (items.isEmpty()) {
 	                return new ArrayList<>();
@@ -188,7 +202,7 @@ add.getScene().getWindow().hide();}
 	                List<Phone> result = new ArrayList<>();
 	                for (Phone item : items) {
 	                    result.add(item);
-	                    System.out.println(result);
+	                   
 	                }
 	                return result;
 	            }
@@ -291,5 +305,77 @@ add.getScene().getWindow().hide();}
 	        ObservableList<Phone> phoneData = FXCollections.observableArrayList(showAll());
 	        tableUsers.setItems(phoneData);
 	    }
+	 public void backup() throws FileNotFoundException {
+		 FileInputStream fileIn = null;
+		 FileOutputStream fileOut = null;
+
+		 try {
+		    fileIn = new FileInputStream("file.txt");
+		    fileOut = new FileOutputStream("back_file.txt");
+		    
+		    int a;
+		 // Копирование содержимого файла file.txt
+		    try {
+		 	while ((a = fileIn.read()) != -1) {
+		 	      fileOut.write(a); // Чтение содержимого файла file.txt и запись в файл copied_file.txt
+		 	     
+		 	}
+		 } catch (IOException e) {
+		 	// TODO Auto-generated catch block
+		 	e.printStackTrace();
+		 }
+		 }finally {
+		    if (fileIn != null) {
+		       try {
+		    	   Alert alert = new Alert(Alert.AlertType.INFORMATION);
+	                alert.setTitle("Success");
+	                alert.setHeaderText("Success");
+	                alert.setContentText("Back up file created");
+	                alert.showAndWait();  
+		 		fileIn.close();
+		 	} catch (IOException e) {
+		 		// TODO Auto-generated catch block
+		 		e.printStackTrace();
+		 	}
+		    }
+		    if (fileOut != null) {
+		       try {
+		 		fileOut.close();
+		 	} catch (IOException e) {
+		 		// TODO Auto-generated catch block
+		 		e.printStackTrace();
+		 	}
+		    }
+		 }
+	 }
+	 
+	 private void saveToDB(List<Phone> phones) {
+	        try {
+	            BufferedWriter writer = new BufferedWriter(new PrintWriter(new FileOutputStream("copied_file.txt")));
+	            StringBuilder sb = new StringBuilder();
+	            for (Phone object : phones) {
+	                Phone phone = object;
+	                sb.append(convertItemToString(phone));
+	            }
+	            writer.write(sb.toString());
+	            writer.flush();
+	            writer.close();
+	        } catch (Exception e) {
+	           
+	        }
+	    }
+	 private String convertItemToString(Phone phone) {
+	        StringBuilder sb = new StringBuilder();
+	        sb.append(phone.getBrand());
+	        sb.append("|");
+	        sb.append(phone.getVendor_code());
+	        sb.append("|");
+	        
+	        sb.append(phone.getPrice());
+	        
+	        sb.append("\n");
+	        return sb.toString();
+	    }
+		 
  
 }

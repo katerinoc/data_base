@@ -27,6 +27,7 @@
       <Button fx:id="add" layoutX="214.0" layoutY="403.0" mnemonicParsing="false" text="Добавить запись" />
        <Button fx:id="search" layoutX="350.0" layoutY="403.0" mnemonicParsing="false" text="Поиск" />
       <Button fx:id="delete_phone" layoutX="400.0" layoutY="403.0" mnemonicParsing="false" text="Удаление записи" />
-  
+   <Button fx:id="back_up" layoutX="14.0" layoutY="430.0" mnemonicParsing="false" text="Back up" />
+ 
   </children>
 </AnchorPane>

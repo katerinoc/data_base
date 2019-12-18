@@ -17,13 +17,19 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -32,14 +38,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 
 public class insert_window_controller_second {
-	//private static final String PATH = "copied_file.txt";
-	 
-     
-
-		 
-
-	 
-        
+	    
     @FXML
     private ResourceBundle resources;
 
@@ -51,6 +50,8 @@ public class insert_window_controller_second {
 
     @FXML
     private Button search;
+    @FXML
+    private Button delete;
 
     @FXML
     private TextField search_field_vendor_code;
@@ -66,41 +67,7 @@ public class insert_window_controller_second {
     	   
     	
     	 search.setOnAction(event->{try{
-    		 FileInputStream fileIn = null;
-    		 FileOutputStream fileOut = null;
-
-    		 try {
-    		    fileIn = new FileInputStream("file.txt");
-    		    fileOut = new FileOutputStream("copied_file.txt");
-    		    
-    		    int a;
-    		 // Копирование содержимого файла file.txt
-    		    try {
-    		 	while ((a = fileIn.read()) != -1) {
-    		 	      fileOut.write(a); // Чтение содержимого файла file.txt и запись в файл copied_file.txt
-    		 	   }
-    		 } catch (IOException e) {
-    		 	// TODO Auto-generated catch block
-    		 	e.printStackTrace();
-    		 }
-    		 }finally {
-    		    if (fileIn != null) {
-    		       try {
-    		 		fileIn.close();
-    		 	} catch (IOException e) {
-    		 		// TODO Auto-generated catch block
-    		 		e.printStackTrace();
-    		 	}
-    		    }
-    		    if (fileOut != null) {
-    		       try {
-    		 		fileOut.close();
-    		 	} catch (IOException e) {
-    		 		// TODO Auto-generated catch block
-    		 		e.printStackTrace();
-    		 	}
-    		    }
-    		 }
+    		 
 
     		
     		
@@ -115,13 +82,21 @@ public class insert_window_controller_second {
          	Stage stage = new Stage();
          	stage.setScene(new Scene(root));  
          	stage.show();
-         	search.getScene().getWindow().hide();}
-
+         	//search.getScene().getWindow().hide();}
+    	 }
          	catch (Exception e) {
       	        e.printStackTrace();
       	    }
          	
          });
+    	 delete.setOnAction(event->{try {
+    		 deleteItem();
+    		 //refreshTable();
+    	 }
+    	 catch(Exception e) {
+    	 
+    	 }
+    	 });
     	
     }
     void searchPhones() {
@@ -182,7 +157,7 @@ public class insert_window_controller_second {
     public List<Phone> showAll() {
         try {
          
-            BufferedReader reader = new BufferedReader(new FileReader("copied_file.txt")); 
+            BufferedReader reader = new BufferedReader(new FileReader("file.txt")); 
             
             List<Phone> phones = new ArrayList<>();
            
@@ -257,5 +232,35 @@ public class insert_window_controller_second {
         sb.append("\n");
         return sb.toString();
     }
-	 
+    private Phone getItem(Integer vendor_code) {
+        List<Phone> items = showAll();
+        for (Phone item : items) {
+            if (item.getVendor_code().equals(vendor_code)) {
+                return item;
+            }
+        }
+        return null;
+    }
+   
+    public void deleteItem() {
+        try {Phone find = new Phone();
+        	Integer vendor_code = Integer.parseInt(search_field_vendor_code.getText());
+            
+            File file = new File("file.txt");
+            List<String> out = Files.lines(file.toPath())
+                    .filter(line -> !(String.valueOf(vendor_code).equals(line.substring(1, line.indexOf("|")))))
+                    .collect(Collectors.toList());
+            Files.write(file.toPath(), out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+            System.out.println("Запись была успешно удалена");
+        } catch (FileNotFoundException e) {
+            
+        } catch (IOException e) {
+            
+        }
+        refreshTable();
+    }   
+    private void refreshTable() {
+        ObservableList<Phone> phoneData = FXCollections.observableArrayList(showAll());
+       
+    }
 }
