@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proj.open_db_controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proj.open_db_controller_second">
   <children>
     <!-- Таблица в которую мы будем выводит наш pojo -->
     <TableView fx:id="tableUsers" layoutX="12.0" layoutY="62.0" prefHeight="324.0" prefWidth="600.0">
@@ -22,11 +22,6 @@
         <Font name="Verdana" size="24.0" />
       </font>
     </Label>
-      <Button fx:id="delete" layoutX="14.0" layoutY="403.0" mnemonicParsing="false" text="Удалить" />
-      <Button fx:id="delete_info" layoutX="127.0" layoutY="403.0" mnemonicParsing="false" text="Очистка" />
-      <Button fx:id="add" layoutX="214.0" layoutY="403.0" mnemonicParsing="false" text="Добавить запись" />
-       <Button fx:id="search" layoutX="350.0" layoutY="403.0" mnemonicParsing="false" text="Поиск" />
-      <Button fx:id="delete_phone" layoutX="400.0" layoutY="403.0" mnemonicParsing="false" text="Удаление записи" />
-  
+     
   </children>
 </AnchorPane>

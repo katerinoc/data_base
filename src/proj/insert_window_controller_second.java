@@ -1,6 +1,7 @@
 package proj;
 
 import java.awt.event.ActionEvent;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -15,6 +16,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.scene.control.TextField;
@@ -28,10 +30,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import proj.open_db_controller;
 
 public class insert_window_controller_second {
-	private static final String PATH = "file.txt";
+	//private static final String PATH = "copied_file.txt";
 	 
      
 
@@ -59,15 +60,53 @@ public class insert_window_controller_second {
 
 
     @FXML
-    private void initialize() {
-    	 
+    private void initialize() throws FileNotFoundException {
+
+       
     	   
     	
     	 search.setOnAction(event->{try{
+    		 FileInputStream fileIn = null;
+    		 FileOutputStream fileOut = null;
+
+    		 try {
+    		    fileIn = new FileInputStream("file.txt");
+    		    fileOut = new FileOutputStream("copied_file.txt");
+    		    
+    		    int a;
+    		 // Копирование содержимого файла file.txt
+    		    try {
+    		 	while ((a = fileIn.read()) != -1) {
+    		 	      fileOut.write(a); // Чтение содержимого файла file.txt и запись в файл copied_file.txt
+    		 	   }
+    		 } catch (IOException e) {
+    		 	// TODO Auto-generated catch block
+    		 	e.printStackTrace();
+    		 }
+    		 }finally {
+    		    if (fileIn != null) {
+    		       try {
+    		 		fileIn.close();
+    		 	} catch (IOException e) {
+    		 		// TODO Auto-generated catch block
+    		 		e.printStackTrace();
+    		 	}
+    		    }
+    		    if (fileOut != null) {
+    		       try {
+    		 		fileOut.close();
+    		 	} catch (IOException e) {
+    		 		// TODO Auto-generated catch block
+    		 		e.printStackTrace();
+    		 	}
+    		    }
+    		 }
+
+    		
     		
          	searchPhones();
          	
-         	Parent root = FXMLLoader.load(getClass().getResource("/proj/main.fxml"));
+         	Parent root = FXMLLoader.load(getClass().getResource("/proj/main_second.fxml"));
          	try {
          	}catch(Exception e) {
          	    e.printStackTrace();
@@ -94,11 +133,11 @@ public class insert_window_controller_second {
         if (search_field_brand.getText() != null && !search_field_brand.getText().trim().isEmpty()) {
             find.setBrand(search_field_brand.getText());
         }
-        String price= search_field_price.getText();
+       
         
-        if (price != null && !price.trim().isEmpty()) {
-            Integer prices = Integer.parseInt(price);
-            find.setPrice(prices);
+        if (search_field_price.getText() != null && !search_field_price.getText().trim().isEmpty()) {
+            Integer price = Integer.parseInt(search_field_price.getText());
+            find.setPrice(price);
         }
        
         
@@ -108,6 +147,15 @@ public class insert_window_controller_second {
             }
     public void selectPhones(Phone find) {
         List<Phone> phones =showAll();
+        if (find.getBrand() != null) {
+            for (Phone currentItem : new ArrayList<>(phones)) {
+                if (!currentItem.getBrand().equals(find.getBrand())) {
+                    phones.remove(currentItem);
+                }
+            }
+           saveToDB(phones);
+           return;
+        }
         if (find.getVendor_code() != null) {
             for (Phone currentItem : new ArrayList<>(phones)) {
                 if (!currentItem.getVendor_code().equals(find.getVendor_code())) {
@@ -117,19 +165,15 @@ public class insert_window_controller_second {
             saveToDB(phones);
             return;
         }
-        if (find.getBrand() != null) {
-            for (Phone currentItem : new ArrayList<>(phones)) {
-                if (!currentItem.getBrand().equals(find.getBrand())) {
-                    phones.remove(currentItem);
-                }
-            }
-        }
+        
         if (find.getPrice() != null) {
             for (Phone currentItem : new ArrayList<>(phones)) {
                 if (!currentItem.getPrice().equals(find.getPrice())) {
                     phones.remove(currentItem);
                 }
             }
+            saveToDB(phones);
+            return;
         }
        
     
@@ -138,7 +182,7 @@ public class insert_window_controller_second {
     public List<Phone> showAll() {
         try {
          
-            BufferedReader reader = new BufferedReader(new FileReader(PATH)); 
+            BufferedReader reader = new BufferedReader(new FileReader("copied_file.txt")); 
             
             List<Phone> phones = new ArrayList<>();
            
@@ -185,9 +229,10 @@ public class insert_window_controller_second {
         return null;
        
     }
+  
     private void saveToDB(List<Phone> phones) {
         try {
-            BufferedWriter writer = new BufferedWriter(new PrintWriter(new FileOutputStream(PATH, false)));
+            BufferedWriter writer = new BufferedWriter(new PrintWriter(new FileOutputStream("copied_file.txt")));
             StringBuilder sb = new StringBuilder();
             for (Phone object : phones) {
                 Phone phone = object;

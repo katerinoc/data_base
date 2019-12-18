@@ -3,12 +3,28 @@
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="293.0" prefWidth="411.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proj.insert_window_controller_second">
    <children>
+    <Label layoutX="83.0" layoutY="39.0" text="Поиск по названию:">
+      <font>
+        <Font name="Verdana" size="14.0" />
+      </font>
+    </Label>
       <TextField fx:id="search_field_brand" layoutX="83.0" layoutY="59.0" />
       <Button fx:id="search" layoutX="322.0" layoutY="231.0" mnemonicParsing="false" text="Найти" />
-      <TextField fx:id="search_field_vendor_code" layoutX="83.0" layoutY="108.0" />
-      <TextField fx:id="search_field_price" layoutX="83.0" layoutY="155.0" />
+       <Label layoutX="83.0" layoutY="108.0" text="Поиск по артикулу:">
+      <font>
+        <Font name="Verdana" size="14.0" />
+      </font>
+    </Label>
+      <TextField fx:id="search_field_vendor_code" layoutX="83.0" layoutY="158.0" />
+       <Label layoutX="83.0" layoutY="200.0" text="Поиск по цене:">
+      <font>
+        <Font name="Verdana" size="14.0" />
+      </font>
+    </Label>
+      <TextField fx:id="search_field_price" layoutX="83.0" layoutY="220.0" />
    </children>
 </AnchorPane>

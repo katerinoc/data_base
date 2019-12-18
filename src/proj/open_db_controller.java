@@ -15,12 +15,15 @@ import java.io.OutputStream;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 import proj.Phone;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -60,21 +63,45 @@ private static final String PATH = "file.txt";
     private Button delete_info;
     @FXML
     private Button search;
+    @FXML
+    private Button delete_phone;
 
 
     // инициализируем форму данными
     @FXML
-    private void initialize()  {
+    private void initialize() throws IOException  {
      
         // устанавливаем тип и значение которое должно хранится в колонке
         //idColumn.setCellValueFactory(new PropertyValueFactory<Phone, Integer>("id"));
         brandColumn.setCellValueFactory(new PropertyValueFactory<Phone, String>("brand"));
         vendor_codeColumn.setCellValueFactory(new PropertyValueFactory<Phone, Integer>("vendor_code"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<Phone, Integer>("price"));
+        
          ObservableList<Phone> phonesData = FXCollections.observableArrayList(showAll());
+       
 
         // заполняем таблицу данными
         tableUsers.setItems(phonesData);
+           delete_phone.setOnAction(event->{try{
+        	   Phone selectedPhone = tableUsers.getSelectionModel().getSelectedItem();
+               if (selectedPhone == null) {
+                   Alert alert = new Alert(Alert.AlertType.ERROR);
+                   alert.setTitle("Ошибка");
+                   alert.setHeaderText("Ошибка");
+                   alert.setContentText("Не выбран элемент для удаления");
+                   alert.showAndWait();
+               } else {
+            	   tableUsers.getItems().remove(selectedPhone);
+            	   deleteItem(selectedPhone.getVendor_code());
+                   //refreshTable();
+               }
+        	}
+        	catch (Exception e) {
+     	        e.printStackTrace();
+     	    }
+          
+        	
+        });
         
         delete.setOnAction(event->{try{
         	
@@ -115,7 +142,7 @@ add.getScene().getWindow().hide();}
         }
         });
         search.setOnAction(event->{try
-        {Parent root2 = FXMLLoader.load(getClass().getResource("/proj/insert_window.fxml"));
+        {Parent root2 = FXMLLoader.load(getClass().getResource("/proj/insert_window_second.fxml"));
         try {
         }catch(Exception e) {
             e.printStackTrace();
@@ -133,6 +160,7 @@ add.getScene().getWindow().hide();}
         });
     
     }
+    
 	 public List<Phone> showAll() {
 	        try {
 	         
@@ -244,5 +272,24 @@ add.getScene().getWindow().hide();}
          stage.setScene(new Scene(root1));  
          stage.show();
      }
+	 
+	 public void deleteItem(Integer vendor_code) {
+	        try {
+	            File file = new File(PATH);
+	            List<String> out = Files.lines(file.toPath())
+	                    .filter(line -> !(String.valueOf(vendor_code).equals(line.substring(0, line.indexOf("|")))))
+	                    .collect(Collectors.toList());
+	            Files.write(file.toPath(), out, StandardOpenOption.WRITE, StandardOpenOption.TRUNCATE_EXISTING);
+	            System.out.println("Запись была успешно удалена");
+	        } catch (FileNotFoundException e) {
+	           
+	        } catch (IOException e) {
+	            
+	        }
+	    }
+	 private void refreshTable() {
+	        ObservableList<Phone> phoneData = FXCollections.observableArrayList(showAll());
+	        tableUsers.setItems(phoneData);
+	    }
  
 }
